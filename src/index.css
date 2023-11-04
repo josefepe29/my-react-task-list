@@ -16,11 +16,11 @@
 body {
     height: 100vh;
     width: 100%;
-    background: url("./assets/abstract-grunge-decorative-blue-dark-wall-background-dark-blue-concrete-backgrounds-with-rough-texture-dark-wallpaper-space-for-te.jpg") center/cover no-repeat;
+    background: url("./assets/abstract-grunge-decorative-blue-dark-wall-background-dark-blue-concrete-backgrounds-with-rough-texture-dark-wallpaper-space-for-te.jpg") center/cover repeat-y;
     font-family: 'Prompt', sans-se rif;
 }
 
-header {
+.header-container {
     position: relative;
     width: 100%;
     top: 0;
@@ -100,6 +100,189 @@ header {
     color: #fff;
 }
 
+.profile{
+    text-align: center;
+}
+
+.profile h1 {
+    color: var(--white);
+}
+
+.profile span {
+    display: flex;
+    color: var(--white);
+    letter-spacing: 1px;
+    justify-content: center;
+
+}
+
+#date {
+    color: var(--white);
+    padding-bottom: 5px;
+}
+
+.container-main {
+    max-width: 100%;
+    width: 100vw;
+    height: 100%;
+    margin: 0 auto;
+}
+
+/*Agregar tarea*/
+
+.add-task {
+    /* background-color: var(--white); */
+    display: flex;
+    border-radius: 15px;
+    height: 70px;
+    align-items: center;
+    padding: 10px;
+    gap: 20px;
+    margin: 40px 0;
+
+}
+
+.add-task input {
+    background-color: var(--white);
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--white);
+    padding:30px;
+}
+
+.add-task button {
+    display: flex;
+    font-size: 30px;
+    color: var(--white);
+    background-color: var(--blue-dark);
+    border:none;
+    align-items: center;
+}
+
+.add-task button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.add-task input::placeholder {
+    font-size: 1rem;
+    color: #356169;
+}
+
+.cont-button-icon{
+    display: flex;
+    width:60px;
+    justify-content: space-around;
+}
+
+/*Secciones*/
+
+.task-section  {
+    width: 100%;
+    height: 200px;
+    font-size: 20px;
+    margin: 0 auto 
+}
+
+.task-section> div h3 {
+    display: flex;
+    color: var(--white);
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.task-section ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    margin: 0 auto;
+}
+
+.task-section li {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+}
+
+.task-section>ul p,input{
+    text-transform:capitalize;
+    font-size: 1rem;
+}
+
+.task-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, var(--blue-dark), var(--green));
+    border-radius: 15px;
+    padding: 10px;
+    margin: 15px 0;
+    color: var(--white);
+}
+
+.task-edit-input{
+    background-color: transparent;
+    border-radius: 8px;
+    text-align: center;
+    color: var(--white);
+}
+.task-description{
+    width: 100%;
+    height: 100px;
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 0 auto 15px auto
+}
+
+.task-edit-input-description{
+    width: 106%;
+    height: 100px;
+    background-color: var(--white);
+    color: var(--blue-dark);
+    border-radius: 15px;
+    padding: 10px;
+    margin: -10px 0 0 -10px
+}
+
+.icon {
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    color:var(--white);
+    font-size: 20px;
+}
+
+.icon:hover{
+    transform: scale(1.1,1.1);
+    color: var(--blue-light);
+    transition: 0.15s ease;
+}
+
+.icon-container{
+    display: flex;
+    gap:10px
+}
+
+#trash-icon:hover{
+    color:red;
+    transition: 0.15s ease;
+}
+
+
+.line-through{
+    text-decoration: line-through;
+    color: var(--blue-light);
+}
+
+#check{
+    color: var(--blue-light);
+}
 
 @media (max-width: 950px) {
     .navbar :is(.hamburger-btn) {
@@ -126,140 +309,5 @@ header {
         font-size: 0.9rem;
         padding: 7px 10px;
     }
-}
-
-.profile{
-    text-align: center;
-}
-
-.profile h1 {
-    color: var(--white);
-}
-
-.profile span {
-    display: flex;
-    color: var(--white);
-    letter-spacing: 1px;
-    justify-content: center;
 
 }
-
-#date {
-    color: var(--white);
-    padding-bottom: 5px;
-}
-
-.container {
-    max-width: 100%;
-    width: 400px;
-    height: 600px;
-    margin: 0 auto
-}
-
-/*Agregar tarea*/
-
-.add-task {
-    background-color: var(--white);
-    border-radius: 15px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    gap: 20px;
-    margin: 40px 0;
-
-}
-
-.add-task input {
-    width: 100%;
-    height: 80%;
-    border-radius: 8px;
-    border: none;
-    background-color: var(--white);
-    padding-left: 10px;
-}
-
-.add-task button {
-    display: flex;
-    font-size: 30px;
-    color: var(--blue-dark);
-    background:transparent;
-    border:none;
-    align-items: center;
-}
-
-.add-task button:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-}
-
-.add-task input::placeholder {
-    font-size: 1rem;
-    color: #356169;
-}
-
-.cont-button-icon{
-    display: flex;
-    width:60px;
-    justify-content: space-around;
-}
-
-/*Secciones*/
-
-
-.task-section> h3 {
-    display: flex;
-    color: var(--white);
-    margin-bottom: 20px;
-    justify-content: center;
-}
-
-.task-section li {
-    display: flex;
-    background: linear-gradient(to bottom, var(--blue-dark), var(--green));
-    border-radius: 15px;
-    padding: 10px;
-    align-items: center;
-    justify-content: space-between;
-    margin: 15px 0;
-    color: var(--white);
-}
-
-.task-section  {
-    
-    font-size: 20px;
-    margin: 0 
-}
-
-.icon {
-    background:transparent;
-    border:none;
-    cursor:pointer;
-    color:var(--white);
-    font-size: 20px;
-}
-
-.icon:hover {
-    transform: scale(1.1,1.1);
-    color: var(--blue-light);
-}
-
-#trash-icon:hover{
-    color:red
-}
-
-.task-section>ul p{
-    text-transform:capitalize;
-    font-size: 1rem;
-}
-
-.line-through{
-    text-decoration: line-through;
-    color: var(--blue-light);
-}
-
-#check{
-    color: var(--blue-light);
-}
-
-
