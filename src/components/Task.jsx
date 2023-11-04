@@ -4,14 +4,14 @@ import { BsTrash, BsCircle, BsPencilSquare, BsCheckCircle, BsFillCaretDownFill, 
 
 export const Task = (props) => {
     
-    const {id,title, description,status,updateStat,deleteTask} = props
+    const {id,title, description,status,updateStat,deleteTask, editTask} = props
     
     const [stat, setStat] = useState(status)
-    const [showNewIcon, setShowNewIcon] = useState(false);
-    
+    const [showNewIconTitle, setShowNewIconTitle] = useState(false);    
+    const [showNewIconDescription, setShowNewIconDescription] = useState(false);    
     const [inputTitleValue, setInputTitleValue] = useState('');
     const [inputDescriptionValue, setInputDescriptionValue] = useState('');
-    
+
     const lineThrough = stat ? "line-through" : ""
     const decoration = stat ? "check" : ""
     const iconDecoration = stat ? <BsCheckCircle /> : <BsCircle />
@@ -19,18 +19,62 @@ export const Task = (props) => {
 
     //Handle para capturar valores del titulo de la tarea
     const handleInputTitleChange = (event) => {
-        setInputTitleValue(event.target.value);
-    };
-    
+        const value = event.target.value
+        setInputTitleValue(value);
+    }
+
+    //Toggle del icono de edicion y de check
+    const handleEditIconTitleOnClick = () => {
+        setShowNewIconTitle(showNewIconTitle ? false : true);
+    }
+
+    //Handle para enviar los datos editados del titulo al padre(TaskList)
+    const handleSubmitEditTitle = (e) => {
+        e.preventDefault()
+        if (inputTitleValue) {
+            const data = {
+                    id:id,
+                    title: inputTitleValue,
+                    description: description,
+                    status:false
+                }
+                //envia data al padre (TaskList)
+                editTask(id,data)
+        }
+        //Reinicia los valores del input de title
+        setInputTitleValue('')
+        setShowNewIconTitle(showNewIconTitle ? false : true)
+    }
+
+    //Toggle del icono de edicion y de check
+    const handleEditIconDescriptionOnClick = () => {
+        setShowNewIconDescription(showNewIconDescription ? false : true);
+    }
+
     //Handle para capturar valores de la descripcion de la tarea
     const handleInputDescriptionChange = (event) => {
-        setInputDescriptionValue(event.target.value);
-    };
+        const value = event.target.value
+        setInputDescriptionValue(value);
+    }
 
-    const handleEditIconClick = () => {
-        setShowNewIcon(showNewIcon ? false : true);
-    };
-    
+    //Handle para enviar los datos editados de la tarea al padre(TaskList)
+    const handleSubmitEditDescription = (e) => {
+        e.preventDefault()
+        if (inputDescriptionValue) {
+            const data = {
+                    id:id,
+                    title: title,
+                    description: inputDescriptionValue,
+                    status:false
+                }
+                //envia data al padre (TaskList)
+                editTask(id,data)
+        }
+        //Reinicia los valores del input de description
+        setInputDescriptionValue('')
+        setShowNewIconDescription(showNewIconDescription ? false : true)
+    }
+
     //Hace un toggle del estado y lo envia a traves de una funcion dada por parametro al padre (TaskList)
     const handleCompleteClick = () => {
         setStat(stat ? false : true)
@@ -50,20 +94,46 @@ export const Task = (props) => {
                 <div className="icon-container">
 
                     <button className="icon" id={decoration} onClick={handleCompleteClick}>{iconDecoration}</button>
-                    {/* <button className="icon"><BsFillCaretDownFill/></button> */}
+                    <button className="icon"><BsFillCaretDownFill/></button>
                 </div>
-                {!showNewIcon && <p className={lineThrough}>{title} </p>}
-                {showNewIcon && <input className="task-edit-input" name="title" id="input-title" onChange={handleInputTitleChange} autoFocus/>}
+                {!showNewIconTitle && <p className={lineThrough}>{title} </p>}
+                {showNewIconTitle && <input 
+                    className="task-edit-input" 
+                    name="title" 
+                    id="input-title" 
+                    onChange={handleInputTitleChange} 
+                    placeholder={title} 
+                    autoFocus 
+                />
+                }
                 <div className="cont-button-icon">
-                    <button className="icon" id="edit-icon" onClick={handleEditIconClick}>{showNewIcon ? <BsCheckLg /> : <BsPencilSquare/>}</button>
+                    {!showNewIconTitle &&
+                        <button className="icon" id="edit-title-icon" onClick={handleEditIconTitleOnClick}>
+                            <BsPencilSquare />
+                        </button>}
+                    {showNewIconTitle &&
+                        <button className="icon" id="edit-check-title-icon" onClick={handleSubmitEditTitle}>
+                            <BsCheckLg />
+                        </button>}
                     <button className="icon" id="trash-icon" onClick={handleDeleteClick}><BsTrash/></button>
                 </div>
             </article>
-            {!showNewIcon && <article className="task-description">
-                <p>{description}</p>
+            {!showNewIconDescription && <article className="task-description">
+                <p className="description">{description}</p>
+                <button className="icon" id="edit-description-icon" onClick={handleEditIconDescriptionOnClick}>
+                    <BsPencilSquare />
+                </button>
             </article>}
-            {showNewIcon && <article className="task-description">
-                <input className="task-edit-input-description" name="description" id="input-description" type="text" onChange={handleInputDescriptionChange}/>
+            {showNewIconDescription && <article className="task-description">
+                <textarea
+                    className="task-edit-input-description"
+                    name="description"
+                    id="input-description"
+                    type="text"
+                    onChange={handleInputDescriptionChange}
+                    placeholder="Input your new description"
+                />
+                <button className="icon" id="edit-description-icon" onClick={handleSubmitEditDescription}><BsCheckLg /></button>
             </article>}
         </li>
 

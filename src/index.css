@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* border: 1px solid white; */
+    /* border: 1px solid red; */
 }
 
 
@@ -139,6 +139,7 @@ body {
     padding: 10px;
     gap: 20px;
     margin: 40px 0;
+    border:1px solid var(--white)
 
 }
 
@@ -184,7 +185,7 @@ body {
     width: 100%;
     height: 200px;
     font-size: 20px;
-    margin: 0 auto 
+    margin: 0 auto;
 }
 
 .task-section> div h3 {
@@ -210,6 +211,7 @@ body {
 
 .task-section>ul p,input{
     text-transform:capitalize;
+    position: relative;
     font-size: 1rem;
 }
 
@@ -231,24 +233,48 @@ body {
     text-align: center;
     color: var(--white);
 }
+
+.task-edit-input::placeholder{
+    color: var(--white);
+}
+
 .task-description{
     width: 100%;
     height: 100px;
     background-color: var(--white);
-    border-radius: 15px;
+    border-radius: 20px 20px 20px 0;
     padding: 10px;
-    margin: 0 auto 15px auto
+    margin: 0 auto 15px auto;
+    color: var(--blue-dark);
+    display: flex;
+    gap: 15px;
+}
+
+.description{
+    width: 90%;
+    height: auto;
+    overflow-y: auto;
+    word-wrap: break-word;
+
 }
 
 .task-edit-input-description{
-    width: 106%;
+    width: 92%;
     height: 100px;
     background-color: var(--white);
     color: var(--blue-dark);
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px;
-    margin: -10px 0 0 -10px
+    margin: -10px 0 0 -10px;
+    font-size: 16px;
+    overflow: scroll;
+    font-family: 'Prompt', sans-se rif;
+    border: none;
+    resize: none;
 }
+
+.task-edit-input-description::placeholder{
+    color: var(--blue-dark);}
 
 .icon {
     background:transparent;
@@ -267,6 +293,10 @@ body {
 .icon-container{
     display: flex;
     gap:10px
+}
+
+#edit-description-icon{
+    color:var(--blue-dark);
 }
 
 #trash-icon:hover{

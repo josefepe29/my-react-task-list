@@ -32,9 +32,9 @@ const list = []
 
 function App() {
   
-  const [newTasks, setNewTasks] = useState(list)
+  const [newTasks, setNewTasks] = useState([])
 
-    //Carga el estado actual de las tareas del localStorage
+    //Carga el estado actual de las tareas del localStorage con dependencia vacia para que se ejecute al montar la app
     useEffect(() => {
       const storedTasks = localStorage.getItem("tasks");
   
@@ -56,7 +56,10 @@ function App() {
   //Actualizar el estado de una tarea de la lista y actualizar el localStorage
   const handleUpdateStatus = (id, stat) => {
     const updatedTasks = [...newTasks]
-    updatedTasks[id] = { ...updatedTasks[id], status: stat }
+    const taskIndex = updatedTasks.findIndex((task) => task.id === id)
+    if (taskIndex===0 || taskIndex) {
+      updatedTasks[taskIndex] = { ...updatedTasks[taskIndex], status: stat }
+    }
     
     setNewTasks(updatedTasks)
     localStorage.setItem('tasks', JSON.stringify(updatedTasks))
@@ -65,9 +68,24 @@ function App() {
   //Eliminar una tarea de la lista y borrarla del localStorage
   const handleDeleteTask = (id) => {
     const deletedTasks = [...newTasks]
-    deletedTasks.splice(id, 1)
+    const taskIndex = deletedTasks.findIndex((task) => task.id === id)
+    if (taskIndex === 0 || taskIndex) {
+      deletedTasks.splice(taskIndex, 1)
+    }
     setNewTasks(deletedTasks)
     localStorage.setItem('tasks', JSON.stringify(deletedTasks))
+  }
+  
+  //Edita una tarea de la lista y la actualiza en el localStorage
+  const handleEditTask = (id,task) => {
+    const editedTasks = [...newTasks]
+    const taskIndex = editedTasks.findIndex((task) => task.id === id)
+    if (taskIndex===0 || taskIndex) {
+      editedTasks[taskIndex] = { ...editedTasks[taskIndex], ...task }
+    }
+    setNewTasks(editedTasks)
+
+    localStorage.setItem('tasks', JSON.stringify(editedTasks))
   }
   
 
@@ -75,10 +93,15 @@ function App() {
     <>
       <header className="header-container">
         <Header />
-        <HeaderTask list={list} addTask={addTask} />
+        <HeaderTask addTask={addTask} />
       </header>
       <main className="container-main">
-        <TaskList list={newTasks} updateStatus={handleUpdateStatus} deleteTaskParent={handleDeleteTask}/>
+        <TaskList
+          list={newTasks}
+          updateStatus={handleUpdateStatus}
+          deleteTaskParent={handleDeleteTask}
+          editTaskParent={handleEditTask}
+        />
       </main>
     </>
   )

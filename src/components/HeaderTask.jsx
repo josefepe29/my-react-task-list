@@ -1,5 +1,6 @@
 import { useState } from "react";
-import {BsFillPlusSquareFill} from "react-icons/bs";
+import { BsFillPlusSquareFill } from "react-icons/bs";
+import { v4 as uuidv4 } from 'uuid';
 
 
 export const HeaderTask = (props) => {
@@ -25,6 +26,7 @@ export const HeaderTask = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const data = {
+      id:uuidv4(),
       title: inputTitleValue,
       description: inputDescriptionValue,
       status:false
