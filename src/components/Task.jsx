@@ -11,9 +11,12 @@ export const Task = (props) => {
     const [showNewIconDescription, setShowNewIconDescription] = useState(false);    
     const [inputTitleValue, setInputTitleValue] = useState('');
     const [inputDescriptionValue, setInputDescriptionValue] = useState('');
+    const [collapse, setCollapse] = useState(true)
 
     const lineThrough = stat ? "line-through" : ""
     const decoration = stat ? "check" : ""
+    const background = stat ? "checked-background" : ""
+    const collapseDescription = collapse ? "collapse-description" : ""
     const iconDecoration = stat ? <BsCheckCircle /> : <BsCircle />
 
 
@@ -81,6 +84,12 @@ export const Task = (props) => {
         updateStat(id,!stat)
     }
 
+    //Handle para colapsar las tareas
+    const handleCollapseOnClick = () => {
+        setCollapse(collapse ? false : true)
+        console.log(collapse)
+    }
+
     //Envia el id al padre a traves de una funcion dada por parametro al padre (TaskList)
     const handleDeleteClick = () => {
         deleteTask(id)
@@ -89,14 +98,14 @@ export const Task = (props) => {
     return (
         <li>
 
-            <article className="task-title">
+            <article className="task-title" id={background}>
                 
                 <div className="icon-container">
 
                     <button className="icon" id={decoration} onClick={handleCompleteClick}>{iconDecoration}</button>
-                    <button className="icon"><BsFillCaretDownFill/></button>
+                    <button className="icon" onClick={handleCollapseOnClick}><BsFillCaretDownFill/></button>
                 </div>
-                {!showNewIconTitle && <p className={lineThrough}>{title} </p>}
+                {!showNewIconTitle && <p className={lineThrough}><strong>{title}</strong> </p>}
                 {showNewIconTitle && <input 
                     className="task-edit-input" 
                     name="title" 
@@ -118,13 +127,13 @@ export const Task = (props) => {
                     <button className="icon" id="trash-icon" onClick={handleDeleteClick}><BsTrash/></button>
                 </div>
             </article>
-            {!showNewIconDescription && <article className="task-description">
-                <p className="description">{description}</p>
+            {!showNewIconDescription && <article className="task-description" id={collapseDescription}>
+                <p className="description" id={background}>{description}</p>
                 <button className="icon" id="edit-description-icon" onClick={handleEditIconDescriptionOnClick}>
                     <BsPencilSquare />
                 </button>
             </article>}
-            {showNewIconDescription && <article className="task-description">
+            {showNewIconDescription && <article className="task-description" id={collapseDescription}>
                 <textarea
                     className="task-edit-input-description"
                     name="description"

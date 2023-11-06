@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -6,8 +6,21 @@ import { v4 as uuidv4 } from 'uuid';
 export const HeaderTask = (props) => {
   const { addTask } = props
 
-  // Función para agregar una tarea
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+
   
+  //Hooks para almacenar y actualizar el estado de los inputs title y description 
   const [inputTitleValue, setInputTitleValue] = useState('');
   const [inputDescriptionValue, setInputDescriptionValue] = useState('');
 
@@ -45,7 +58,7 @@ export const HeaderTask = (props) => {
   return (
     <>
       <section className="profile">
-        <div id="date">{dateFormat.format(date)}</div>
+        <span>{dateFormat.format(date)} {time.toLocaleTimeString()}</span>
         <h1> Hi, Jose Perez</h1>
         <span>Let's complete your goals!</span>
       </section>
