@@ -61,7 +61,7 @@ export const HeaderTask = (props) => {
     <>
       <section className="profile">
         <span>{dateFormat.format(date)} {time.toLocaleTimeString()}</span>
-        <h1> Hi there</h1>
+        <h1> Hi There 😎</h1>
         <span>Let's complete your goals!</span>
       </section>
       <form className="add-task">
