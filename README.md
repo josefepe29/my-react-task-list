@@ -30,6 +30,6 @@ Mi ToDo List es una aplicación web simple que te permite llevar un registro de 
 4. Elimina tareas haciendo clic en el botón "Eliminar".
 5. Utiliza los botones de edicion al lado del titulo y descripcion para cambiar estos campos.
 
-¡Eso es todo! Ahora puedes comenzar a gestionar tus tareas de manera eficiente.
+¡Eso es todo! Ahora puedes comenzar a gestionar tus tareas y tu tiempo de manera eficiente.
 
 ¡Espero que disfrutes utilizando esta aplicación para mantener tus tareas organizadas!

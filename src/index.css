@@ -219,7 +219,7 @@ body {
     align-items: center;
     text-align: center;
     justify-content: space-between;
-    background-color: rgba(53, 56, 62, 5%);
+    background-color: rgba(53, 56, 62, 10%);
     border-radius: 15px;
     padding: 10px;
     margin: 15px 0;
@@ -255,7 +255,7 @@ body {
     height: auto;
     overflow-y: auto;
     word-wrap: break-word;
-    background-color: rgba(53,56,62,5%);
+    background-color: rgba(53,56,62,10%);
     padding: 10px;
     border-radius: 8px;
 }
@@ -316,10 +316,6 @@ body {
 
 #checked-background{
     background-color: rgba(0, 204, 44,10%)
-}
-
-#checked-shadow{
-    box-shadow: 1px 1px 10px rgba(0, 204, 44, 60%);
 }
 
 #collapse-description{

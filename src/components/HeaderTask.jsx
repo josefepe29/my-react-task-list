@@ -6,8 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 export const HeaderTask = (props) => {
   const { addTask } = props
 
+  //Hook para actualizar la hora
   const [time, setTime] = useState(new Date());
 
+  //Hook para renderizar la hora al montar la pagina
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTime(new Date());
@@ -59,13 +61,12 @@ export const HeaderTask = (props) => {
     <>
       <section className="profile">
         <span>{dateFormat.format(date)} {time.toLocaleTimeString()}</span>
-        <h1> Hi, Jose Perez</h1>
+        <h1> Hi there</h1>
         <span>Let's complete your goals!</span>
       </section>
       <form className="add-task">
-
-        <input type="text" name="title" placeholder="add a task title" value={inputTitleValue} onChange={handleInputTitleChange}/>
-        <input type="text" name="description" placeholder="add a task description" value={inputDescriptionValue} onChange={handleInputDescriptionChange} />
+        <input type="text" name="title" placeholder="add a task title" value={inputTitleValue} onChange={handleInputTitleChange} required/>
+        <input type="text" name="description" placeholder="add a task description" value={inputDescriptionValue} onChange={handleInputDescriptionChange}/>
         <button type="submit" onClick={handleSubmit}><BsFillPlusSquareFill/></button>
       </form>
       

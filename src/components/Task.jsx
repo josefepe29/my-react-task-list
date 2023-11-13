@@ -87,7 +87,6 @@ export const Task = (props) => {
     //Handle para colapsar las tareas
     const handleCollapseOnClick = () => {
         setCollapse(collapse ? false : true)
-        console.log(collapse)
     }
 
     //Envia el id al padre a traves de una funcion dada por parametro al padre (TaskList)
@@ -96,7 +95,7 @@ export const Task = (props) => {
     }
 
     return (
-        <li>
+        <li >
 
             <article className="task-title" id={background}>
                 
@@ -105,7 +104,7 @@ export const Task = (props) => {
                     <button className="icon" id={decoration} onClick={handleCompleteClick}>{iconDecoration}</button>
                     <button className="icon" onClick={handleCollapseOnClick}><BsFillCaretDownFill/></button>
                 </div>
-                {!showNewIconTitle && <p className={lineThrough}><strong>{title}</strong> </p>}
+                {!showNewIconTitle && <p className={lineThrough} title="Task Title"><strong>{title}</strong> </p>}
                 {showNewIconTitle && <input 
                     className="task-edit-input" 
                     name="title" 
@@ -128,7 +127,7 @@ export const Task = (props) => {
                 </div>
             </article>
             {!showNewIconDescription && <article className="task-description" id={collapseDescription}>
-                <p className="description" id={background}>{description}</p>
+                <p className="description" title="Task description"id={background}>{description}</p>
                 <button className="icon" id="edit-description-icon" onClick={handleEditIconDescriptionOnClick}>
                     <BsPencilSquare />
                 </button>
