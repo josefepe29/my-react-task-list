@@ -18,9 +18,10 @@ export const TaskList = () => {
             
                     return <Task
                         key={index}
-                        id={task.id}
+                        id={task._id}
                         title={task?.title}
                         description={task?.description}
+                        status={task?.status}
                     />
                 })}
 
