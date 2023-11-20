@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import { v4 as uuidv4 } from 'uuid';
+import { DataContext } from "../context/data";
+import { useForm } from 'react-hook-form';
 
+export const HeaderTask = () => {
+  const { addTask } = useContext(DataContext);
+  const { register, handleSubmit, formState: { errors,isValid }, reset } = useForm();
 
-export const HeaderTask = (props) => {
-  const { addTask } = props
-
-  //Hook para actualizar la hora
+  // Hook para actualizar la hora
   const [time, setTime] = useState(new Date());
 
-  //Hook para renderizar la hora al montar la pagina
+  // Hook para renderizar la hora al montar la página
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTime(new Date());
@@ -20,43 +22,10 @@ export const HeaderTask = (props) => {
     };
   }, []);
 
-
-  
-  //Hooks para almacenar y actualizar el estado de los inputs title y description 
-  const [inputTitleValue, setInputTitleValue] = useState('');
-  const [inputDescriptionValue, setInputDescriptionValue] = useState('');
-
-
-  //Handle para capturar valores del titulo de la tarea
-  const handleInputTitleChange = (event) => {
-    setInputTitleValue(event.target.value);
-  };
-  
-  //Handle para capturar valores de la descripcion de la tarea
-  const handleInputDescriptionChange = (event) => {
-    setInputDescriptionValue(event.target.value);
-  };
-  
-  //Realiza acciones con el submit para agregarlos a la lista de tareas
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const data = {
-      id:uuidv4(),
-      title: inputTitleValue,
-      description: inputDescriptionValue,
-      status:false
-    };
-    //envia data al padre (App)
-    addTask(data)
-    //Reinicia los valores de los inputs
-    setInputTitleValue('')
-    setInputDescriptionValue('')
-  };
-  
-  //Agrega fecha actualizada en tiempo real
+  // Agrega fecha actualizada en tiempo real
   const date = new Date()
-  const dateFormat = new Intl.DateTimeFormat('en', { day:"numeric", month: "long", year:"numeric" })
-  
+  const dateFormat = new Intl.DateTimeFormat('en', { day: "numeric", month: "long", year: "numeric" })
+
   return (
     <>
       <section className="profile">
@@ -64,12 +33,28 @@ export const HeaderTask = (props) => {
         <h1> Hi There 😎</h1>
         <span>Let's complete your goals!</span>
       </section>
-      <form className="add-task">
-        <input type="text" name="title" placeholder="add a task title" value={inputTitleValue} onChange={handleInputTitleChange} required/>
-        <input type="text" name="description" placeholder="add a task description" value={inputDescriptionValue} onChange={handleInputDescriptionChange}/>
-        <button type="submit" onClick={handleSubmit}><BsFillPlusSquareFill/></button>
+      <form className="add-task" onSubmit={handleSubmit((data) => {
+        const result = { ...data, id: uuidv4(), status: false }
+        // Envia result a 
+        addTask(result);
+        // Reinicia los valores del formulario
+        reset();
+      })}>
+          <input type="text" placeholder="add a task title" {...register('title', {
+            required: {
+              value: true,
+              message: 'Title is required'
+            },
+            validate: (value) => {
+              return value.length>=3||'Title must be at least 3 characters'
+            }
+          })} />
+        {errors.title && <span className="error">{errors.title.message}</span>}
+        <input type="text" placeholder="add a task description" {...register('description', {
+          required: false
+        })} />
+        <button type="submit" disabled={!isValid}><BsFillPlusSquareFill /></button>
       </form>
-      
     </>
-    )
+  )
 }

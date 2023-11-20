@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { BsTrash, BsCircle, BsPencilSquare, BsCheckCircle, BsFillCaretDownFill, BsCheckLg } from "react-icons/bs";
+import { DataContext } from "../context/data";
 
 
 export const Task = (props) => {
     
-    const {id,title, description,status,updateStat,deleteTask, editTask} = props
+    const {handleDeleteTask, handleEditTask, handleUpdateStatus } = useContext(DataContext)
+    
+    const {id,title,description,status} = props
     
     const [stat, setStat] = useState(status)
     const [showNewIconTitle, setShowNewIconTitle] = useState(false);    
@@ -42,7 +45,7 @@ export const Task = (props) => {
                     status:false
                 }
                 //envia data al padre (TaskList)
-                editTask(id,data)
+                handleEditTask(id,data)
         }
         //Reinicia los valores del input de title
         setInputTitleValue('')
@@ -71,7 +74,7 @@ export const Task = (props) => {
                     status:false
                 }
                 //envia data al padre (TaskList)
-                editTask(id,data)
+                handleEditTask(id,data)
         }
         //Reinicia los valores del input de description
         setInputDescriptionValue('')
@@ -81,7 +84,7 @@ export const Task = (props) => {
     //Hace un toggle del estado y lo envia a traves de una funcion dada por parametro al padre (TaskList)
     const handleCompleteClick = () => {
         setStat(stat ? false : true)
-        updateStat(id,!stat)
+        handleUpdateStatus(id,!stat)
     }
 
     //Handle para colapsar las tareas
@@ -91,7 +94,7 @@ export const Task = (props) => {
 
     //Envia el id al padre a traves de una funcion dada por parametro al padre (TaskList)
     const handleDeleteClick = () => {
-        deleteTask(id)
+        handleDeleteTask(id)
     }
 
     return (

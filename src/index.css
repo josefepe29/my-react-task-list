@@ -146,6 +146,11 @@ body {
     box-shadow: 1px 1px 10px var(--shadow);
 }
 
+.error{
+    font-size: small;
+    color: red;
+}
+
 .add-task button {
     display: flex;
     font-size: 30px;
@@ -166,6 +171,8 @@ body {
     font-size: 1rem;
     color: #356169;
 }
+
+
 
 .cont-button-icon{
     display: flex;
