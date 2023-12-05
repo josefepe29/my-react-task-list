@@ -6,7 +6,7 @@ Mi ToDo List es una aplicación web simple que te permite llevar un registro de 
 
 ## Funcionalidades Principales
 
-- **Agregar Tareas:** Puedes agregar nuevas tareas a tu lista ingresando el título de la tarea y haciendo clic en el botón "+" o dando click a Enter.
+- **Agregar Tareas:** Puedes agregar nuevas tareas a tu lista ingresando el título y descripcion (opcional) de la tarea y haciendo clic en el botón "+" o dando click a Enter.
 
 - **Marcar Tareas Completadas:** Cuando hayas completado una tarea, puedes marcarla como completada haciendo clic en la casilla de verificación junto al titulo de la tarea.
 

@@ -1,0 +1,12 @@
+.signup-link {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+.welcome-span {
+  color: var(--white);
+}

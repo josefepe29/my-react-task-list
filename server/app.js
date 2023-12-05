@@ -1,36 +1,36 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const api = require('./Routes/tasks.routes.js');
-require('dotenv').config()
-const connectDB = require('./db.js')
-const login = require("./auth/login")
-const { validateCredentials, validateHTTPMethods } = require("./auth/authentication.js")
-const cors = require('cors')
+const tasks = require("./Routes/tasks.routes.js");
+const users = require("./Routes/users.routes");
+require("dotenv").config();
+const connectDB = require("./db.js");
+const { validateHTTPMethods } = require("./auth/authentication.js");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
-app.use(cors())
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 //Conexion a la base de datos
-connectDB()
+connectDB();
 
 //Variables de entorno
-const PORT = process.env.PORT
-
+const PORT = process.env.PORT;
 
 app.use(express.json());
 
 //Middleware para validar metodos HTTP
-app.use(validateHTTPMethods)
-
-//Uso de login
-app.use("/login", login)
-
-//Middleware para validar credenciales de los usuarios
-// app.use(validateCredentials)
+app.use(validateHTTPMethods);
 
 //Uso del router de las tareas
-app.use('/api',api)
+app.use("/api", tasks);
+app.use("/api", users);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
-
